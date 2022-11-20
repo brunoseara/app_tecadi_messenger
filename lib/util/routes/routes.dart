@@ -5,13 +5,17 @@ import '../../view/Home.dart';
 import '../../view/Login.dart';
 
 class RouteGenerator {
+  static const String SPLASH = "/";
+  static const String LOGIN = "/login";
+  static const String HOME = "/home";
+
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case "/":
+      case SPLASH:
         return MaterialPageRoute(builder: (_) => Splash());
-      case "/login":
+      case LOGIN:
         return MaterialPageRoute(builder: (_) => Login());
-      case "/home":
+      case HOME:
         return MaterialPageRoute(builder: (_) => Home());
       default:
         return MaterialPageRoute(builder: (_) => Splash());

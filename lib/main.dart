@@ -5,10 +5,10 @@ void main() {
   runApp(MaterialApp(
     theme: ThemeData(
       colorScheme: ColorScheme.fromSwatch()
-          .copyWith(primary: Color(0xff0C3F6B), secondary: Colors.white),
+          .copyWith(primary: const Color(0xff0C3F6B), secondary: Colors.white),
     ),
     title: "Tecadi Messenger",
-    initialRoute: "/",
+    initialRoute: RouteGenerator.SPLASH,
     onGenerateRoute: RouteGenerator().generateRoute,
     debugShowCheckedModeBanner: true,
   ));
