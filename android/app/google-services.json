@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "583511043964",
+    "project_id": "tecadi-messenger-b0e1f",
+    "storage_bucket": "tecadi-messenger-b0e1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583511043964:android:636ef91a768fd2d8137ef9",
+        "android_client_info": {
+          "package_name": "br.com.tecadi.app_tecadi_messenger.app_tecadi_messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "583511043964-to7gc19bab4kf392ht8upr1rb40te718.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxRyuU5aIJNW2YGzMPGai5esoKjsJqhF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "583511043964-to7gc19bab4kf392ht8upr1rb40te718.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
