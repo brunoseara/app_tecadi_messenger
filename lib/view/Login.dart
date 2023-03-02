@@ -1,3 +1,4 @@
+import 'package:app_tecadi_messenger/util/data/initFirestore.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -36,7 +37,7 @@ class _LoginState extends State<Login> {
                   child: TextField(
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
-                    style: const TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 14),
                     decoration: InputDecoration(
                         contentPadding:
                             const EdgeInsets.fromLTRB(32, 16, 32, 16),
@@ -47,14 +48,14 @@ class _LoginState extends State<Login> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        prefixIcon: Icon(Icons.account_circle)),
+                        prefixIcon: const Icon(Icons.account_circle)),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: TextField(
                     keyboardType: TextInputType.text,
-                    style: const TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 14),
                     decoration: InputDecoration(
                         contentPadding:
                             const EdgeInsets.fromLTRB(32, 16, 32, 16),

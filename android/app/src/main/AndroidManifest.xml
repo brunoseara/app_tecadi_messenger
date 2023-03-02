@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.tecadi.app_tecadi_messenger.app_tecadi_messenger">
+    package="br.com.tecadi.app_tecadi_messenger">
    <application
         android:label="app_tecadi_messenger"
         android:name="${applicationName}"

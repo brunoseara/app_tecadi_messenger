@@ -14,10 +14,9 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    initFirestore().initialize();
+    InitFirestore().initialize();
     Timer(const Duration(seconds: 5),
         () => Navigator.pushReplacementNamed(context, RouteGenerator.LOGIN));
-    //initFirestore().saveUsr();
   }
 
   @override
