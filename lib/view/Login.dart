@@ -1,5 +1,8 @@
-import 'package:app_tecadi_messenger/util/data/initFirestore.dart';
+import 'package:app_tecadi_messenger/model/Usuario.dart';
+import 'package:app_tecadi_messenger/util/generic/Generic.dart';
 import 'package:flutter/material.dart';
+
+import '../util/routes/routes.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -9,6 +12,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  Usuario usuario = Usuario();
+  TextEditingController _controllerUser = TextEditingController(text: "bruno.seara@tecadi.com.br");
+  TextEditingController _controllerPass = TextEditingController(text: "123456");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +42,7 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: TextField(
+                    controller: _controllerUser,
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     style: const TextStyle(fontSize: 14),
@@ -54,6 +62,8 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: TextField(
+                    controller: _controllerPass,
+                    obscureText: true,
                     keyboardType: TextInputType.text,
                     style: const TextStyle(fontSize: 14),
                     decoration: InputDecoration(
@@ -72,7 +82,11 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: const EdgeInsets.only(top: 16, bottom: 24),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if(_validateFields()){
+                        Navigator.pushReplacementNamed(context, Routes.HOME);
+                      };
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xff1270A2),
                         foregroundColor: Colors.white,
@@ -99,7 +113,9 @@ class _LoginState extends State<Login> {
                         ],
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.CADASTRO);
+                    },
                   ),
                 )
               ],
@@ -109,4 +125,35 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+
+  bool _validateFields() {
+    String username = _controllerUser.text;
+    String password = _controllerPass.text;
+    String field = "";
+
+    if (username.isNotEmpty && username.contains("@")) {
+      if (password.isNotEmpty) {
+        usuario.username = username;
+        usuario.password = password;
+        field = "";
+      } else {
+        field = "senha";
+      }
+    } else {
+      field = "usuário";
+    }
+
+    if (field.isNotEmpty) {
+      Generic gen = Generic();
+      gen.alert(
+          context: context,
+          titulo: "Ops! Algo deu errado!",
+          conteudo:
+              "O campo $field está vazio ou não foi prenchido corretamente.",
+          buttonText: "Okay! Obrigado!");
+        return false;
+    }
+    return true;
+  }
+
 }

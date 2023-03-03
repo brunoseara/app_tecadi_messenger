@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:app_tecadi_messenger/util/data/initFirestore.dart';
+import 'package:app_tecadi_messenger/util/data/InitFirestore.dart';
 import 'package:app_tecadi_messenger/util/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     InitFirestore().initialize();
     Timer(const Duration(seconds: 5),
-        () => Navigator.pushReplacementNamed(context, RouteGenerator.LOGIN));
+        () => Navigator.pushReplacementNamed(context, Routes.LOGIN));
   }
 
   @override

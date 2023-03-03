@@ -8,8 +8,8 @@ void main() {
           .copyWith(primary: const Color(0xff0C3F6B), secondary: Colors.white),
     ),
     title: "Tecadi Messenger",
-    initialRoute: RouteGenerator.SPLASH,
-    onGenerateRoute: RouteGenerator().generateRoute,
+    initialRoute: Routes.SPLASH,
+    onGenerateRoute: Routes().generateRoute,
     debugShowCheckedModeBanner: true,
   ));
 }
