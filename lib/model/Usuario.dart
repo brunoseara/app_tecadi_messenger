@@ -18,5 +18,6 @@ class Usuario{
     String? ramal;
 
     Usuario();
+    Usuario.contato(this.nome,  this.departamento, this.funcao ,this.pathFoto);
 
 }
