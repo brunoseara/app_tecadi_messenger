@@ -38,39 +38,7 @@ class _TabContatosState extends State<TabContatos> {
       itemCount: listaContatos.length,
       itemBuilder: (context, index) {
         Usuario contato = listaContatos[index];
-        return Dismissible(
-            key: Key(contato.nome!),
-            background: Container(
-              color: Colors.red,
-              child: const Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 16),
-                  child: Icon(Icons.delete),
-                ),
-              ),
-            ),
-            confirmDismiss: (direction) async {
-              if (direction == DismissDirection.endToStart) {
-                bool delete = true;
-                final snackbarController =
-                    ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: const Text("Conversa excluída"),
-                    action: SnackBarAction(
-                        label: 'Desfazer', onPressed: () => delete = false),
-                  ),
-                );
-                await snackbarController.closed;
-                return delete;
-              }
-            },
-            onDismissed: (_) {
-              setState(() {
-                listaContatos.removeAt(index);
-              });
-            },
-            child: ListTile(
+        return ListTile(
               contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               leading: CircleAvatar(
                   backgroundColor: Colors.grey,
@@ -83,7 +51,7 @@ class _TabContatosState extends State<TabContatos> {
                       fontWeight: FontWeight.normal,
                       fontSize: 12,
                       color: Colors.grey)),
-            ));
+            );
       },
     );
   }

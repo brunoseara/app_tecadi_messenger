@@ -45,6 +45,7 @@ dependencies:
   shared_preferences: ^2.0.18 # shared preferences
   http: ^0.13.5               # http
   get: ^4.6.5                 # getx
+  intl: ^0.17.0               # international
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +89,9 @@ flutter:
     - assets/image/logo/grey_vert.png
     - assets/image/logo/preto_fill_horiz.png
     - assets/image/logo/preto_fill_vert.png
+    - assets/image/dialogo/bg.jpg
+    - assets/image/dialogo/bg1.png
+    - assets/image/dialogo/bg2.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

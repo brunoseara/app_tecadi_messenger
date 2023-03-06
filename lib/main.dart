@@ -10,6 +10,6 @@ void main() {
     title: "Tecadi Messenger",
     initialRoute: Routes.SPLASH,
     onGenerateRoute: Routes().generateRoute,
-    debugShowCheckedModeBanner: true,
+    debugShowCheckedModeBanner: false,
   ));
 }

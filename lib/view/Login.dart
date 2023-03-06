@@ -12,10 +12,12 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  
+  final TextEditingController _controllerUser = TextEditingController(text: "bruno.seara@tecadi.com.br");
+  final TextEditingController _controllerPass = TextEditingController(text: "123456");
+  
   Usuario usuario = Usuario();
-  TextEditingController _controllerUser = TextEditingController(text: "bruno.seara@tecadi.com.br");
-  TextEditingController _controllerPass = TextEditingController(text: "123456");
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +86,7 @@ class _LoginState extends State<Login> {
                   child: ElevatedButton(
                     onPressed: () {
                       if(_validateFields()){
-                        Navigator.pushReplacementNamed(context, Routes.HOME);
+                        Navigator.pushReplacementNamed(context, Routes.HOME, arguments: usuario.getUsuario(_controllerUser.text));
                       };
                     },
                     style: ElevatedButton.styleFrom(
