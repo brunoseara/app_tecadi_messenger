@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:app_tecadi_messenger/util/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  HttpOverrides.global = MyHttpOverrides();
   runApp(MaterialApp(
     theme: ThemeData(
       colorScheme: ColorScheme.fromSwatch()
@@ -12,4 +15,13 @@ void main() {
     onGenerateRoute: Routes().generateRoute,
     debugShowCheckedModeBanner: false,
   ));
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
 }

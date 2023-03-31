@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:app_tecadi_messenger/model/Usuario.dart';
 import 'package:app_tecadi_messenger/util/generic/Generic.dart';
 import 'package:flutter/material.dart';
 
+import '../api/api_response.dart';
+import '../api/login_api.dart';
+import '../api/user_api.dart';
+import '../util/generic/prefs.dart';
 import '../util/routes/routes.dart';
 
 class Login extends StatefulWidget {
@@ -12,12 +18,17 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  
-  final TextEditingController _controllerUser = TextEditingController(text: "bruno.seara@tecadi.com.br");
-  final TextEditingController _controllerPass = TextEditingController(text: "123456");
-  
+  final TextEditingController _controllerUser =
+      TextEditingController(text: "000361");
+  final TextEditingController _controllerPass =
+      TextEditingController(text: "7410");
+  final _formKey = GlobalKey<FormState>();
+
   Usuario usuario = Usuario();
-  
+  //service
+  LoginApi api = LoginApi();
+  UserApi apiUser = UserApi();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,64 +52,72 @@ class _LoginState extends State<Login> {
                     height: 150,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: TextField(
-                    controller: _controllerUser,
-                    autofocus: true,
-                    keyboardType: TextInputType.emailAddress,
-                    style: const TextStyle(fontSize: 14),
-                    decoration: InputDecoration(
-                        contentPadding:
-                            const EdgeInsets.fromLTRB(32, 16, 32, 16),
-                        hintText: "usuario@tecadi.com.br",
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        prefixIcon: const Icon(Icons.account_circle)),
+                Form(
+                  key: _formKey,
+                    child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: TextField(
+                      controller: _controllerUser,
+                      autofocus: true,
+                      keyboardType: TextInputType.emailAddress,
+                      style: const TextStyle(fontSize: 14),
+                      decoration: InputDecoration(
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                          hintText: "usuario@tecadi.com.br",
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          prefixIcon: const Icon(Icons.account_circle)),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: TextField(
-                    controller: _controllerPass,
-                    obscureText: true,
-                    keyboardType: TextInputType.text,
-                    style: const TextStyle(fontSize: 14),
-                    decoration: InputDecoration(
-                        contentPadding:
-                            const EdgeInsets.fromLTRB(32, 16, 32, 16),
-                        hintText: "senha",
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        prefixIcon: const Icon(Icons.password_rounded)),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: TextField(
+                      controller: _controllerPass,
+                      obscureText: true,
+                      keyboardType: TextInputType.text,
+                      style: const TextStyle(fontSize: 14),
+                      decoration: InputDecoration(
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                          hintText: "senha",
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          prefixIcon: const Icon(Icons.password_rounded)),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16, bottom: 24),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if(_validateFields()){
-                        Navigator.pushReplacementNamed(context, Routes.HOME, arguments: usuario.getUsuario(_controllerUser.text));
-                      };
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff1270A2),
-                        foregroundColor: Colors.white,
-                        elevation: 15,
-                        padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
-                        textStyle: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
-                    child: const Text("Entrar"),
-                  ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 24),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_validateFields()) {
+                          _executeLogin(_formKey);
+                          Navigator.pushReplacementNamed(context, Routes.HOME,
+                              arguments:
+                                  usuario.getUsuario(_controllerUser.text));
+                        }
+                        ;
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff1270A2),
+                          foregroundColor: Colors.white,
+                          elevation: 15,
+                          padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                          textStyle: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold)),
+                      child: const Text("Entrar"),
+                    ),
+                  )
+                ])),
                 Center(
                   child: GestureDetector(
                     child: const Text(
@@ -133,7 +152,7 @@ class _LoginState extends State<Login> {
     String password = _controllerPass.text;
     String field = "";
 
-    if (username.isNotEmpty && username.contains("@")) {
+    if (username.isNotEmpty && !username.contains("@")) {
       if (password.isNotEmpty) {
         usuario.username = username;
         usuario.password = password;
@@ -153,9 +172,28 @@ class _LoginState extends State<Login> {
           conteudo:
               "O campo $field está vazio ou não foi prenchido corretamente.",
           buttonText: "Okay! Obrigado!");
-        return false;
+      return false;
     }
     return true;
   }
 
+  /// Realiza a autenticação
+  _executeLogin(GlobalKey<FormState> formKey) async {
+    if (formKey.currentState!.validate()) {
+      try {
+        ApiResponse response =
+            await api.login(_controllerUser.text, _controllerPass.text);
+
+        if (response.isSuccess) {
+          Map<String, dynamic> json = response.response;
+          Prefs.setString(Prefs.token, json['access_token']);
+          response = await api.getUser(_controllerUser.text);
+        }
+      } on HttpException catch (e) {
+        print(e.message);
+      } catch (i, _) {
+        print(i.toString());
+      }
+    }
+  }
 }

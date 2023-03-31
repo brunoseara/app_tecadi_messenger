@@ -26,4 +26,17 @@ class LoginApi {
 
     return response;
   }
+
+  Future<ApiResponse> getUser(String username) async {
+    String route = '/app/api/framework/v1/users/$username';
+    ApiResponse response = await _http.executeGet(
+      route: route,
+    );
+
+    if (response.isSuccess) {
+      response.response = json.decode(response.response);
+    }
+    return response;
+  }
 }
+
