@@ -28,7 +28,7 @@ class Usuario{
       usr.departamento = "TI";
       usr.funcao = "Analista de Sistemas";
       usr.pathFoto = "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877";
-      usr.username = email;
+      usr.username = "bruno.seara@tecadi.com.br";
       return usr;
     }
 }
