@@ -21,14 +21,12 @@ class _DialogoState extends State<Dialogo> {
       "Olá, tudo bem?",
       "Boa tarde, amigo!",
       "Tudo certo?",
-      "Sim!",
-      "Pode ver meu chamado?",
-      "Então não está tudo certo!",
-      "O que você acha que eu quero fazer com seu chamado? Vou fechá-lo, óbvio!",
-      "Não, por favor! Não feche! Está tudo parado!",
-      "O que está parado?",
-      "Está tudo certo do lado do cliente",
-      "Que lado?"
+      "Sim e com você?",
+      "Tudo ótimo!",
+      "Precisamos verificar a carga que acabou de chegar!",
+      "Claro! Sem problemas! Vou imediatamente conferir.",
+      "Obrigado! Assim que possível reporte o resultado.",
+      "Pode deixar, vou fazer meu melhor!"
     ];
 
     Expanded dialogArea = Expanded(

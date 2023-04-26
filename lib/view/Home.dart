@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:app_tecadi_messenger/model/Usuario.dart';
 import 'package:app_tecadi_messenger/view/TabConversas.dart';
 import 'package:flutter/material.dart';

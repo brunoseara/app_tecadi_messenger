@@ -1,4 +1,3 @@
-import 'package:app_tecadi_messenger/model/Usuario.dart';
 import 'package:app_tecadi_messenger/util/routes/routes.dart';
 import 'package:flutter/material.dart';
 
