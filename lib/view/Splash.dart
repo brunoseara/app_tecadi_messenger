@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:app_tecadi_messenger/util/data/InitFirestore.dart';
+import 'package:app_tecadi_messenger/util/data/init_firestore.dart';
 import 'package:app_tecadi_messenger/util/routes/routes.dart';
 import 'package:flutter/material.dart';
 

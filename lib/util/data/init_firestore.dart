@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../model/Usuario.dart';
+import '../../model/usuario.dart';
 
 class InitFirestore {
   Future<FirebaseFirestore> initialize() async {
@@ -18,13 +18,13 @@ class InitFirestore {
     FirebaseAuth auth = FirebaseAuth.instance;
     Usuario newUser = Usuario();
 
-    auth
-        .createUserWithEmailAndPassword(
+    auth.createUserWithEmailAndPassword(
             email: usuario.username!, password: usuario.password!)
         .then((firebaseUser){
           newUser.username = firebaseUser.user!.email;
           newUser.userId = firebaseUser.user!.uid;
           newUser.nome = firebaseUser.user!.displayName;
+
         })
         .catchError((onError) {
           print("ERRO " + onError.toString());

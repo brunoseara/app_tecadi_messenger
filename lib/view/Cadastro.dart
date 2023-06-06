@@ -1,8 +1,8 @@
-import 'package:app_tecadi_messenger/model/Usuario.dart';
-import 'package:app_tecadi_messenger/util/data/InitFirestore.dart';
+import 'package:app_tecadi_messenger/model/usuario.dart';
+import 'package:app_tecadi_messenger/util/data/init_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../util/generic/Generic.dart';
+import 'package:realm/realm.dart';
+import '../util/generic/generic.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({super.key});
@@ -13,8 +13,8 @@ class Cadastro extends StatefulWidget {
 
 class _CadastroState extends State<Cadastro> {
   Usuario usuario = Usuario();
-  TextEditingController _controllerUser = TextEditingController();
-  TextEditingController _controllerPass = TextEditingController();
+  final TextEditingController _controllerUser = TextEditingController();
+  final TextEditingController _controllerPass = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +91,10 @@ class _CadastroState extends State<Cadastro> {
                         if(validateFields()){
                           InitFirestore firestore = InitFirestore();
                           usuario = firestore.cadastrarUsuario(usuario);
+
+                          if(usuario != null){
+                           // var config = Configuration.local([Usuario.schema]);
+                          }
                         };
                       },
                       style: ElevatedButton.styleFrom(

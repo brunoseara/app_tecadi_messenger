@@ -1,7 +1,7 @@
 
 import 'package:realm/realm.dart';
 
-import 'Mensagem.dart';
+import 'mensagem.dart';
 @RealmModel()
 class Conversa{
 

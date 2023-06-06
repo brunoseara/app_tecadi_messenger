@@ -40,7 +40,7 @@ dependencies:
   firebase_auth: ^4.2.9       # autenticacao
   firebase_storage: ^11.0.14  # armazenamento arquivos
   cloud_firestore: ^4.4.3     # banco de dados online
-  realm: ^1.0.3               # banco de dados interno
+  realm: ^1.1.0               # banco de dados interno
   connectivity_plus: ^3.0.3   # conectividade
   shared_preferences: ^2.1.0  # shared preferences
   http: ^0.13.5               # http

@@ -1,4 +1,4 @@
-import 'package:app_tecadi_messenger/model/Conversa.dart';
+import 'package:app_tecadi_messenger/model/conversa.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

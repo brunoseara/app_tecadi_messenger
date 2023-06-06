@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:app_tecadi_messenger/model/Usuario.dart';
-import 'package:app_tecadi_messenger/util/generic/Generic.dart';
+import 'package:app_tecadi_messenger/model/usuario.dart';
+import 'package:app_tecadi_messenger/util/generic/generic.dart';
 import 'package:flutter/material.dart';
 
 import '../api/api_response.dart';

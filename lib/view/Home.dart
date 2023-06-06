@@ -1,5 +1,5 @@
-import 'package:app_tecadi_messenger/model/Usuario.dart';
-import 'package:app_tecadi_messenger/view/TabConversas.dart';
+import 'package:app_tecadi_messenger/model/usuario.dart';
+import 'package:app_tecadi_messenger/view/tab_conversas.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../util/routes/routes.dart';
-import 'TabContatos.dart';
+import 'tab_contatos.dart';
 
 class Home extends StatefulWidget {
   final Usuario usuario;
