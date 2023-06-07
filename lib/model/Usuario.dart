@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realm/realm.dart';
+//part 'usuario.g.dart';
 
 @RealmModel()
 class Usuario{

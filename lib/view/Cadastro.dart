@@ -93,7 +93,7 @@ class _CadastroState extends State<Cadastro> {
                           usuario = firestore.cadastrarUsuario(usuario);
 
                           if(usuario != null){
-                           // var config = Configuration.local([Usuario.schema]);
+                            //var config = Configuration.local([Usuario.schema]);
                           }
                         };
                       },

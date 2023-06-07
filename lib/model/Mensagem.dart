@@ -8,4 +8,6 @@ class Mensagem{
   DateTime? dataLeitura;
   bool? recebida;
   DateTime? dataRecebimento;  
+  bool? isDeleted;
+
 }
