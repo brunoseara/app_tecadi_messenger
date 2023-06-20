@@ -1,14 +1,14 @@
 import 'dart:io';
-
 import 'package:app_tecadi_messenger/model/usuario.dart';
 import 'package:app_tecadi_messenger/util/generic/generic.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../api/api_response.dart';
 import '../api/login_api.dart';
 import '../api/user_api.dart';
 import '../util/generic/prefs.dart';
 import '../util/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -19,9 +19,9 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final TextEditingController _controllerUser =
-      TextEditingController(text: "000361");
+      TextEditingController(text: "bruno.seara@tecadi.com.br");
   final TextEditingController _controllerPass =
-      TextEditingController(text: "7410");
+      TextEditingController(text: "852088");
   final _formKey = GlobalKey<FormState>();
 
   Usuario usuario = Usuario();
@@ -164,7 +164,7 @@ class _LoginState extends State<Login> {
       field = "usuário";
     }
 
-    if (field.isNotEmpty) {
+    if (field.isEmpty) {
       Generic gen = Generic();
       gen.alert(
           context: context,
@@ -183,7 +183,27 @@ class _LoginState extends State<Login> {
       try {
         ApiResponse response =
             await api.login(_controllerUser.text, _controllerPass.text);
+        FirebaseAuth auth = FirebaseAuth.instance;
+        auth.signInWithEmailAndPassword(
+            email: _controllerUser.text, 
+            password: _controllerPass.text
+            ).then((firebaseUser) async {
+              
+              FirebaseFirestore db = FirebaseFirestore.instance;
+              DocumentSnapshot snapshot = await db.collection("usuarios").doc(firebaseUser.user!.uid).get();
+              if(snapshot != null){
+                Usuario usr = Usuario();
+                Usuario x = Usuario();
+                var data = snapshot.data();
+                print(data);
+                usr.userId = firebaseUser.user!.uid;
+                //usr = x.mapToUsuario(firebaseUser.user);
+              }
 
+              () => Navigator.pushReplacementNamed(context,Routes.HOME);
+            }).catchError((onError){
+
+            });
         if (response.isSuccess) {
           Map<String, dynamic> json = response.response;
           Prefs.setString(Prefs.token, json['access_token']);

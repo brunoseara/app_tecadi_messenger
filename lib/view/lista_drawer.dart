@@ -1,4 +1,3 @@
-import 'package:app_tecadi_messenger/model/usuario.dart';
 import 'package:flutter/material.dart';
 
 class ListaDrawer extends StatefulWidget {

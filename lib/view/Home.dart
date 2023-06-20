@@ -2,8 +2,6 @@ import 'package:app_tecadi_messenger/model/usuario.dart';
 import 'package:app_tecadi_messenger/view/tab_conversas.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../util/routes/routes.dart';
@@ -60,7 +58,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 child: CircleAvatar(
                     backgroundColor: Colors.grey,
                     backgroundImage: NetworkImage(
-                        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"))),
+                        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"))),
             onTap: () {
               Scaffold.of(context).openDrawer();
             },
@@ -92,7 +90,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 currentAccountPicture: Stack(children: [
                   GestureDetector(child: const CircleAvatar(
                     backgroundImage: NetworkImage(
-                        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+                        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
                     maxRadius: 100,
                   ),
                   onTap: (){},),

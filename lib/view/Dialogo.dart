@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class Dialogo extends StatefulWidget {
-  final Conversa conversa;
-  const Dialogo(this.conversa, {super.key});
+  final parametros;
+  const Dialogo(this.parametros, {super.key});
 
   @override
   State<Dialogo> createState() => _DialogoState();
@@ -140,14 +140,14 @@ class _DialogoState extends State<Dialogo> {
               padding: const EdgeInsets.only(top: 4, right: 12),
               child: CircleAvatar(
                 backgroundColor: Colors.blueGrey,
-                backgroundImage: NetworkImage(widget.conversa.pathFoto),
+                backgroundImage: NetworkImage(widget.parametros.pathFoto),
                 maxRadius: 20,
               )),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(widget.conversa.nome),
+              Text(widget.parametros.nome),
               Padding(
                   padding: EdgeInsets.only(bottom: 0, top: 3),
                   child: const Text("Visto por último às 12:35",

@@ -12,25 +12,25 @@ class TabContatos extends StatefulWidget {
 class _TabContatosState extends State<TabContatos> {
   List<Usuario> listaContatos = [
     Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
     Usuario.contato("Luiz Poleza", "TI", "Gerente de TI",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
             Usuario.contato("Kalebe Silva", "TI", "Analista de suporte",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
             Usuario.contato("Alessandro Blenke", "Faturamento", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
             Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
             Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
             Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
             Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
             Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877"),
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
             Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-0.appspot.com/o/profile_pic.jpg?alt=media&token=876b4e04-6858-4bd3-94b1-10a30b83c877")
+        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9")
   ];
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,7 @@
 import 'package:app_tecadi_messenger/model/usuario.dart';
 import 'package:app_tecadi_messenger/view/dialogo.dart';
 import 'package:app_tecadi_messenger/view/cadastro.dart';
-import 'package:app_tecadi_messenger/view/splash.dart';
 import 'package:flutter/material.dart';
-
-import '../../model/conversa.dart';
 import '../../view/home.dart';
 import '../../view/login.dart';
 
@@ -19,8 +16,6 @@ class Routes {
     final args = settings.arguments;
 
     switch (settings.name) {
-      case SPLASH:
-        return MaterialPageRoute(builder: (_) => const Splash());
       case LOGIN:
         return MaterialPageRoute(builder: (_) => const Login());
       case HOME:
@@ -29,10 +24,10 @@ class Routes {
       case CADASTRO:
         return MaterialPageRoute(builder: (_) => const Cadastro());
       case DIALOGO:
-        Conversa conv = settings.arguments as Conversa;
-        return MaterialPageRoute(builder: (_) => Dialogo(conv));
+        var userTalk = settings.arguments;
+        return MaterialPageRoute(builder: (_) => Dialogo(userTalk));
       default:
-        return MaterialPageRoute(builder: (_) => const Splash());
+        return MaterialPageRoute(builder: (_) => const Login());
     }
   }
 }
