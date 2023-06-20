@@ -3,7 +3,7 @@ import 'package:app_tecadi_messenger/view/tab_conversas.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../util/routes/routes.dart';
 import 'tab_contatos.dart';
 
@@ -158,7 +158,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           "Você tem certeza que deseja abandonar o app?"),
                       actions: <Widget>[
                         TextButton(
-                            onPressed: () => Navigator.of(context).pop(false),
+                            onPressed: () {
+                              FirebaseAuth auth = FirebaseAuth.instance;
+                              auth.signOut();
+                              Navigator.of(context).pop(false);
+                              
+                              },
                             child: const Text("Cancelar")),
                         TextButton(
                           onPressed: () {
