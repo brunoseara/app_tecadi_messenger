@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:app_tecadi_messenger/model/usuario.dart';
 import 'package:app_tecadi_messenger/util/generic/generic.dart';
+import 'package:app_tecadi_messenger/view/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import '../api/api_response.dart';
 import '../api/login_api.dart';
@@ -25,6 +27,7 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
   Usuario usuario = Usuario();
+  Usuario usr = Usuario();
   //service
   LoginApi api = LoginApi();
   UserApi apiUser = UserApi();
@@ -100,12 +103,8 @@ class _LoginState extends State<Login> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_validateFields()) {
-                          _executeLogin(_formKey);
-                          Navigator.pushReplacementNamed(context, Routes.HOME,
-                              arguments:
-                                  usuario.getUsuario(_controllerUser.text));
+                          _executeLogin(/*_formKey*/);
                         }
-                        ;
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xff1270A2),
@@ -178,11 +177,15 @@ class _LoginState extends State<Login> {
   }
 
   /// Realiza a autenticação
-  _executeLogin(GlobalKey<FormState> formKey) async {
-    if (formKey.currentState!.validate()) {
+  _executeLogin(/*GlobalKey<FormState> formKey*/) async {
+    /*if (formKey.currentState!.validate()) {
       try {
+        
         ApiResponse response =
             await api.login(_controllerUser.text, _controllerPass.text);
+        */
+        WidgetsFlutterBinding.ensureInitialized();
+          await Firebase.initializeApp();
         FirebaseAuth auth = FirebaseAuth.instance;
         auth.signInWithEmailAndPassword(
             email: _controllerUser.text, 
@@ -191,19 +194,18 @@ class _LoginState extends State<Login> {
               
               FirebaseFirestore db = FirebaseFirestore.instance;
               DocumentSnapshot snapshot = await db.collection("usuarios").doc(firebaseUser.user!.uid).get();
-              if(snapshot != null){
-                Usuario usr = Usuario();
-                Usuario x = Usuario();
-                var data = snapshot.data();
-                print(data);
-                usr.userId = firebaseUser.user!.uid;
-                //usr = x.mapToUsuario(firebaseUser.user);
+              if(snapshot.data() != null){
+                Usuario user = Usuario();
+                // ignore: use_build_context_synchronously
+                Navigator.push(context,
+                                MaterialPageRoute(
+                                  builder: (context) => Home(user.mapToUsuario(snapshot.data())),
+                                ),
+                              );
+                //() => Navigator.pushReplacementNamed(context,Routes.HOME, arguments: user.mapToUsuario(snapshot.data()));
               }
-
-              () => Navigator.pushReplacementNamed(context,Routes.HOME);
-            }).catchError((onError){
-
             });
+            /*
         if (response.isSuccess) {
           Map<String, dynamic> json = response.response;
           Prefs.setString(Prefs.token, json['access_token']);
@@ -214,6 +216,6 @@ class _LoginState extends State<Login> {
       } catch (i, _) {
         print(i.toString());
       }
-    }
+    }*/
   }
 }

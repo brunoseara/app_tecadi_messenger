@@ -17,15 +17,20 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController? _tabController;
+  String _loggedUser = ""; 
 
   @override
   void initState() {
     super.initState();
-
     _tabController = TabController(length: 2, vsync: this);
+    FirebaseAuth usr = FirebaseAuth.instance;
+    if(usr.currentUser != null){
+          _loggedUser = usr.currentUser!.uid.toString();
+    }
+
   }
 
-  late XFile? _avatar;
+  late XFile? _img;
 
   Future _getImageFromDevice() async{
     XFile? selectedImage;
@@ -36,15 +41,30 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       setState(() {
         //_avatar = selectedImage;
         _uploadImage(selectedImage!);
+        _img = selectedImage;
       });
     }
   }
 
   Future _uploadImage(image) async {
+    bool isLoading = false;
     FirebaseStorage storage = FirebaseStorage.instance;
+    FirebaseAuth auth = FirebaseAuth.instance;
     Reference path = storage.ref();
-    Reference file = path.child("profile").child("profile_pic.jpg");
-    file.putFile(image);
+    //auth.signInWithEmailAndPassword(email: "bruno.seara@tecadi.com.br", password: "852088");
+    Reference file = path.child("profile").child("").child("profile.jpg");
+
+      UploadTask task = file.putFile(image);
+      task.snapshotEvents.listen((event) {
+      });
+  }
+
+  _getImage(){
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? usr = auth.currentUser;
+    usr!.uid.toString();
+    FirebaseStorage storage = FirebaseStorage.instance;
+
   }
 
   @override
@@ -53,12 +73,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       appBar: AppBar(
         leading: Builder(builder: (BuildContext context) {
           return GestureDetector(
-            child: const Padding(
-                padding: EdgeInsets.fromLTRB(16, 16, 10, 12),
+            child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 10, 12),
                 child: CircleAvatar(
                     backgroundColor: Colors.grey,
                     backgroundImage: NetworkImage(
-                        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"))),
+                        widget.usuario.pathFoto.toString()))),
             onTap: () {
               Scaffold.of(context).openDrawer();
             },
@@ -87,13 +107,38 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-                currentAccountPicture: Stack(children: [
-                  GestureDetector(child: const CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
+                currentAccountPicture: Stack(
+                  children: [
+                  GestureDetector(
+                    child: const CircleAvatar(
+                    //backgroundImage: _avatar;
                     maxRadius: 100,
                   ),
-                  onTap: (){},),
+                  onTap: (){showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                                    Icon(Icons.question_answer),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 10), child: Text("Selecionar foto"))
+                                  ]),
+                                  titlePadding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                                  content: const Text("De onde você deseja selecionar uma mídia?"),
+                                  actionsAlignment: MainAxisAlignment.end,
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {_getImageFromDevice();},
+                                      child: const Text("Galeria"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: const Text("Câmera"),
+                                    )
+                                  ],
+                                );
+                              });
+                  },),
                   Positioned(
                       right: 0,
                       bottom: 0,

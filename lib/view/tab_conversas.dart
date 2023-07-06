@@ -1,7 +1,11 @@
+import 'package:app_tecadi_messenger/util/data/init_firestore.dart';
 import 'package:app_tecadi_messenger/util/routes/routes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import '../model/Conversa.dart';
+import '../model/conversa.dart';
 
 class TabConversas extends StatefulWidget {
   const TabConversas({super.key});
@@ -12,27 +16,17 @@ class TabConversas extends StatefulWidget {
 
 class _TabConversasState extends State<TabConversas> {
   List<Conversa> listaConversas = [
-    Conversa("000361", "Bruno Seára", "Olá, tudo bem?",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Conversa("000363", "Bruno Seára", "Olá, tudo bem?",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Conversa("000364", "Bruno Seára", "Olá, tudo bem?",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Conversa("000365", "Bruno Seára", "Olá, tudo bem?",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Conversa("000368", "Bruno Seára", "Olá, tudo bem?",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Conversa("000396", "Bruno Seára", "Olá, tudo bem?",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Conversa("000397", "Bruno Seára", "Olá, tudo bem?",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Conversa("000398", "Bruno Seára", "Olá, tudo bem?",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Conversa("000399", "Bruno Seára", "Olá, tudo bem?",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Conversa("000400", "Bruno Seára", "Olá, tudo bem?",
+    Conversa("123","000361", "Bruno Seára", "Olá, tudo bem?",
         "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9")
   ];
+
+  @override
+  void initState() {
+    
+    //_getListaConversas();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,4 +124,21 @@ class _TabConversasState extends State<TabConversas> {
       },
     );
   }
+  
+  // Future<List<Conversa>> _getListaConversas() async {
+  //   Conversa conv;
+  //   List<Conversa> lista;
+  //   User? user;
+
+  //   WidgetsFlutterBinding.ensureInitialized();
+  //     await Firebase.initializeApp();
+  //   FirebaseAuth auth = FirebaseAuth.instance;
+  //   FirebaseFirestore db = FirebaseFirestore.instance;
+  //   user = auth.currentUser!;
+  //   if(user.uid.toString() != null){
+  //   }
+
+  //   return(lista)
+
+  // }
 }

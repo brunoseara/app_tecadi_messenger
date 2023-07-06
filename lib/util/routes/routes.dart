@@ -1,3 +1,4 @@
+import 'package:app_tecadi_messenger/model/Conversa.dart';
 import 'package:app_tecadi_messenger/model/usuario.dart';
 import 'package:app_tecadi_messenger/view/dialogo.dart';
 import 'package:app_tecadi_messenger/view/cadastro.dart';
@@ -24,7 +25,7 @@ class Routes {
       case CADASTRO:
         return MaterialPageRoute(builder: (_) => const Cadastro());
       case DIALOGO:
-        var userTalk = settings.arguments;
+        Conversa userTalk = settings.arguments as Conversa;
         return MaterialPageRoute(builder: (_) => Dialogo(userTalk));
       default:
         return MaterialPageRoute(builder: (_) => const Login());

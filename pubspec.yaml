@@ -46,7 +46,7 @@ dependencies:
   http: ^0.13.5               # http
   get: ^4.6.5                 # getx
   intl: ^0.17.0               # international
-  image_picker: ^0.8.7+2      # image picker
+  image_picker: ^0.8.9        # image picker
 
 dev_dependencies:
   flutter_test:

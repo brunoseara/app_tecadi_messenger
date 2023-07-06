@@ -1,6 +1,6 @@
+import 'package:app_tecadi_messenger/model/Usuario.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../model/usuario.dart';
 
 class TabContatos extends StatefulWidget {
   const TabContatos({super.key});
@@ -10,49 +10,79 @@ class TabContatos extends StatefulWidget {
 }
 
 class _TabContatosState extends State<TabContatos> {
-  List<Usuario> listaContatos = [
-    Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-    Usuario.contato("Luiz Poleza", "TI", "Gerente de TI",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-            Usuario.contato("Kalebe Silva", "TI", "Analista de suporte",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-            Usuario.contato("Alessandro Blenke", "Faturamento", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-            Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-            Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-            Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-            Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-            Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9"),
-            Usuario.contato("Bruno Seára", "TI", "Analista de sistemas",
-        "https://firebasestorage.googleapis.com/v0/b/tecadi-messenger-b2576.appspot.com/o/IMG_2142.JPG?alt=media&token=5d109487-3c7c-42a9-b734-9f0571af7bf9")
-  ];
+  late List<Usuario> listaContatos;
+
+  Future<List<Usuario>?> _getContatos() async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    QuerySnapshot querySnapshot = await db.collection("usuarios").get();
+
+    List<Usuario>? listaUsuarios;
+
+    for (DocumentSnapshot item in querySnapshot.docs) {
+      dynamic dados = item.data();
+      listaUsuarios!.add(Usuario.contato(
+          userId: dados["userId"],
+          nome: dados["nome"],
+          departamento: dados["departamento"],
+          funcao: dados["funcao"],
+          pathFoto: dados['pathFoto']));
+    }
+    return (listaUsuarios);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: listaContatos.length,
-      itemBuilder: (context, index) {
-        Usuario contato = listaContatos[index];
-        return ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-              leading: CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  backgroundImage: NetworkImage(contato.pathFoto!)),
-              title: Text(contato.nome!,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 16)),
-              subtitle: Text("${contato.departamento!} - ${contato.funcao}",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 12,
-                      color: Colors.grey)),
+    var children;
+    return FutureBuilder(
+        future: _getContatos(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            children = ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                List<Usuario>? listaItens = snapshot.data;
+                Usuario contato = listaItens![index];
+
+                return ListTile(
+                  contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  leading: CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      backgroundImage: contato.pathFoto != null
+                          ? NetworkImage(contato.pathFoto!)
+                          : null),
+                  title: Text(contato.nome!,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16)),
+                  subtitle: Text("${contato.departamento!} - ${contato.funcao}",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,
+                          color: Colors.grey)),
+                );
+              },
             );
-      },
-    );
+          } else if (snapshot.hasError) {
+            children = Center(
+                child: Column(children: <Widget>[
+              const Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 60,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Text('Error: ${snapshot.error}'),
+              ),
+            ]));
+          } else {
+            children = const Center(
+              child: Column(children: <Widget>[
+                Text("Carregando contatos"),
+                CircularProgressIndicator()
+              ]),
+            );
+          }
+          return children;
+        });
   }
 }

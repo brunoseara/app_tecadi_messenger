@@ -1,12 +1,6 @@
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:realm/realm.dart';
-//part 'usuario.g.dart';
-
-@RealmModel()
 class Usuario{
-    @PrimaryKey()
     String? userId;
     String? codTotvs;
     String? username;
@@ -21,10 +15,10 @@ class Usuario{
     String? ramal;
 
     Usuario();
-    Usuario.contato(this.nome,  this.departamento, this.funcao ,this.pathFoto);
+    Usuario.contato({required this.userId, required this.nome,  this.departamento, this.funcao, this.pathFoto});
 
     Usuario getUsuario(String email){
-      Usuario usr = Usuario();
+    Usuario usr = Usuario();
       usr.userId = "000361";
       usr.codTotvs = "000361";
       usr.nome = "Bruno Fillipe de Barros Seára";
@@ -35,9 +29,9 @@ class Usuario{
       return usr;
     }
 
-  Usuario mapToUsuario(Map<String, dynamic> snapshot) {   
+  Usuario mapToUsuario(var snapshot) {   
       Usuario usr = Usuario();
-      usr.userId = snapshot["userId"];
+      //usr.userId = uuid;
       usr.codTotvs = snapshot["codTotvs"];
       usr.username = snapshot["username"];
       usr.nome = snapshot["nome"];
